@@ -45,10 +45,11 @@ fun generateOrders(): List<Order> {
 
     return orders
 }
-
 @Composable
 fun OrderList(orders: List<Order>) {
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier.padding(vertical = 10.dp) 
+    ) {
         items(orders) { order ->
             OrderItem(order)
         }
@@ -82,9 +83,15 @@ fun OrderItem(order: Order) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewOrderList() {
-    /*Surface {
-        OrderList(generateOrders())
-    }*/
+    Surface {
+        LazyColumn(
+            modifier = Modifier.padding(vertical = 16.dp) // Задаем отступы для предпросмотра
+        ) {
+            items(generateOrders()) { order ->
+                OrderItem(order)
+            }
+        }
+    }
 }
 //https\://services.gradle.org/distributions/gradle-8.12.1-bin.zip
 //file\:///D:/MyFiles/Trainings/0_Gradle/gradle-8.12.1-bin.zip
