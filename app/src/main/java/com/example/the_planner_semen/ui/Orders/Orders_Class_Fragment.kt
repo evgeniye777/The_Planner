@@ -1,4 +1,4 @@
-package com.example.the_planner_semen.ui.home
+package com.example.the_planner_semen.ui.Orders
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.the_planner_semen.databinding.FragmentHomeBinding
+import com.example.the_planner_semen.databinding.FragmentOrdersBinding
 
-class HomeFragment : Fragment() {
+class Orders_Class_Fragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentOrdersBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val galleryViewModel =
+            ViewModelProvider(this).get(Orders_Class_ViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentOrdersBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textOrders
+        galleryViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

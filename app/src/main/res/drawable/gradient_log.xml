@@ -1,0 +1,12 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners
+        android:radius="12dp" /> <!-- Установите радиус для всех углов -->
+
+    <gradient
+        android:angle="135"
+        android:centerColor="#34A298"
+        android:endColor="#2B6660"
+        android:startColor="#579D96"
+        android:type="linear" />
+</shape>
