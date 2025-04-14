@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="whiteStatus">#00FFFFFF</color>
     <color name="my_gray2">#9F9F9F</color>
+    <color name="head_color">#7C5C30</color>
 </resources>

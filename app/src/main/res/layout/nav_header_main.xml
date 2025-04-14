@@ -46,10 +46,10 @@
 </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:orientation="vertical">
         <include
             android:id="@+id/id_orders_menu"
@@ -64,6 +64,39 @@
 
         <include
             android:id="@+id/id_statistics_menu"
+            layout="@layout/menu_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <include
+            android:id="@+id/id_clients_menu"
+            layout="@layout/menu_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <include
+            android:id="@+id/id_workers_menu"
+            layout="@layout/menu_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/head_color" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical">
+        <include
+            android:id="@+id/id_settings_menu"
+            layout="@layout/menu_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <include
+            android:id="@+id/id_types_menu"
             layout="@layout/menu_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

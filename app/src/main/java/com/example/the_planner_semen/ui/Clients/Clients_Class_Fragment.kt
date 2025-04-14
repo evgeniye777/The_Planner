@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.the_planner_semen.databinding.FragmentClientsBinding
+import com.example.the_planner_semen.my_menu.Data_menu_item
+import com.example.the_planner_semen.my_menu.FragmentMenu
+import com.example.the_planner_semen.my_menu.InterfaceMenu
 
 class Clients_Class_Fragment : Fragment() {
 
@@ -16,6 +20,7 @@ class Clients_Class_Fragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

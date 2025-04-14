@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_margin="5dp">
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="2dp">
        <LinearLayout
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -56,13 +58,22 @@
                 tools:ignore="RtlSymmetry" />
 
             <ImageView
-                android:id="@+id/img_but_back"
+                android:id="@+id/id_sours"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingTop="11dp"
                 android:paddingBottom="11dp"
                 android:src="@drawable/img_sours"
+                app:tint="@color/white" />
+            <ImageView
+                android:id="@+id/id_icon_my_menu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp"
+                android:src="@drawable/img_my_menu"
                 app:tint="@color/white" />
         </LinearLayout>
     </LinearLayout>
