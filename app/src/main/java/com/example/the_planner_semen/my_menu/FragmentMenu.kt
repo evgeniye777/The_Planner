@@ -24,12 +24,13 @@ class FragmentMenu : Fragment(), My_Menu_Adapter.HideFragmentListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.id_my_menu)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
         //скрываем меню при клике на оставшуюся часть экрана
         val linearAllmenu: LinearLayout = view.findViewById(R.id.my_linear_layout)
         linearAllmenu.setOnClickListener{parentFragmentManager.beginTransaction().hide(this).commit() }
+
+        //инициализация списка
+        recyclerView = view.findViewById(R.id.id_my_menu)
+        recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Инициализируйте адаптер с обработчиком нажатий
         adapter = My_Menu_Adapter(items, listener,this) // Передаем текущий фрагмент как слушатель
