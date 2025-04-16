@@ -1,12 +1,26 @@
 package com.example.the_planner_semen.data_bd
 
+interface DialogItemPerson {
+    var id: Int
+    var name: String?
+    var phone: String? 
+    var email: String? 
+    var visibility: Int
+}
+interface DialogItemType {
+    var id: Int
+    var name: String?
+    var i: Int
+    var visibility: Int
+}
+
 data class Client(
-    var id: Int=-1,
-    val name: String?,
-    val phone: String?,
-    val email: String?,
-    val visibility: Int = 1
-)
+    override var id: Int = -1,
+    override var name: String?,
+    override var phone: String? = null,
+    override var email: String? = null,
+    override var visibility: Int = 1
+) : DialogItemPerson
 
 data class Coming(
     var id: Int=-1,
@@ -47,58 +61,58 @@ data class Order(
 )
 
 data class TypeMaterial(
-    var id: Int=-1,
-    val name: String?,
-    val i: Int = -1,
-    val visibility: Int = 1
-)
+    override var id: Int = -1,
+    override var name: String?,
+    override var visibility: Int = 1,
+    override var i: Int = -1
+) : DialogItemType
 
 data class TypeName(
-    var id: Int=-1,
-    val name: String?,
-    val i: Int = -1,
-    val visibility: Int = 1
-)
+    override var id: Int = -1,
+    override var name: String?,
+    override var visibility: Int = 1,
+    override var i: Int = -1
+) : DialogItemType
 
 data class TypeStatusComing(
-    var id: Int=-1,
-    val name: String?,
-    val i: Int = -1,
-    val visibility: Int = 1
-)
+    override var id: Int = -1,
+    override var name: String?,
+    override var visibility: Int = 1,
+    override var i: Int = -1
+) : DialogItemType
 
 data class TypeStatusOrder(
-    var id: Int=-1,
-    val name: String?,
-    val i: Int = -1,
-    val visibility: Int = 1
-)
+    override var id: Int = -1,
+    override var name: String?,
+    override var visibility: Int = 1,
+    override var i: Int = -1
+) : DialogItemType
 
 data class TypeStatusPay(
-    var id: Int=-1,
-    val name: Int,
-    val i: Int = -1,
-    val visibility: Int = 1
-)
+    override var id: Int = -1,
+    override var name: String?,
+    override var visibility: Int = 1,
+    override var i: Int = -1
+) : DialogItemType
 
 data class TypeAccumulation(
-    var id: Int=-1,
-    val name: String?,
-    val i: Int = -1,
-    val visibility: Int = 1
-)
+    override var id: Int = -1,
+    override var name: String?,
+    override var visibility: Int = 1,
+    override var i: Int = -1
+) : DialogItemType
 
 data class TypeUnit(
-    var id: Int=-1,
-    val name: String?,
-    val i: Int = -1,
-    val visibility: Int = 1
-)
+    override var id: Int = -1,
+    override var name: String?,
+    override var visibility: Int = 1,
+    override var i: Int = -1
+) : DialogItemType
 
 data class Worker(
-    var id: Int=-1,
-    val name: String?,
-    val phone: String?,
-    val email: String?,
-    val visibility: Int = 1
-)
+    override var id: Int = -1,
+    override var name: String?,
+    override var phone: String? = null,
+    override var email: String? = null,
+    override var visibility: Int = 1
+) : DialogItemPerson

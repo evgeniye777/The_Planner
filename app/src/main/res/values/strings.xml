@@ -11,4 +11,21 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_text_description">Выбрать меню</string>
+
+    <string name="add_list">Добавить</string>
+    <string name="change_list">Изменить</string>
+    <string name="save_list">Сохранить</string>
+    <string name="close_list">Отмена</string>
+    <string name="visible_checkbox">Отображать</string>
+
+    <string-array name="type_array">
+        <item>Материал</item>
+        <item>Наименования работ</item>
+        <item>Статус ресурсов</item>
+        <item>Статус заказа</item>
+        <item>Статус оплаты</item>
+        <item>Виды накопления</item>
+        <item>Единицы измерения</item>
+    </string-array>
 </resources>
+

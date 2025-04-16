@@ -1,14 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/menu_linear"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:gravity="center|left"
-    android:orientation="horizontal">
+    android:paddingStart="30dp"
+    android:orientation="horizontal"
+    tools:ignore="RtlHardcoded,RtlSymmetry">
 
     <TextView
-        android:id="@+id/id_text_order_item"
+        android:id="@+id/id_text_list_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:textSize="20sp" />
 </LinearLayout>

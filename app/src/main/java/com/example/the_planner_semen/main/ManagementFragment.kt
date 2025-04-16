@@ -19,6 +19,7 @@ import com.example.the_planner_semen.ui.Orders.Orders_Class_Fragment
 import com.example.the_planner_semen.ui.Statistics.Clients_Class_Fragment
 import com.example.the_planner_semen.ui.Statistics.Settings_Class_Fragment
 import com.example.the_planner_semen.ui.Statistics.Statistics_Class_Fragment
+import com.example.the_planner_semen.ui.Statistics.ExportImport_Class_Fragment
 import com.example.the_planner_semen.ui.Statistics.Types_Class_Fragment
 import com.example.the_planner_semen.ui.Statistics.Workers_Class_Fragment
 import com.google.android.material.navigation.NavigationView
@@ -31,6 +32,7 @@ class ManagementFragment(val binding: ActivityMainBinding,val context: Context,v
     private lateinit var menu_5: LinearLayout
     private lateinit var menu_6: LinearLayout
     private lateinit var menu_7: LinearLayout
+    private lateinit var menu_8: LinearLayout
 
     private lateinit var navView: NavigationView
     private lateinit var drawerLayout: DrawerLayout
@@ -77,12 +79,12 @@ class ManagementFragment(val binding: ActivityMainBinding,val context: Context,v
         //Клиенты
         menu_4 = navView.getHeaderView(0).findViewById(R.id.id_clients_menu)
         val clients = Clients_Class_Fragment()
-        var dateClients = DateOneFragment(menu_4,"Клиенты",clients)
+        var dateClients = DateOneFragment(menu_4,"Клиенты",clients,true,clients.menuFragment)
 
         //Исполнители
         menu_5 = navView.getHeaderView(0).findViewById(R.id.id_workers_menu)
         val workers = Workers_Class_Fragment()
-        var dateWorkers = DateOneFragment(menu_5,"Исполнители",workers)
+        var dateWorkers = DateOneFragment(menu_5,"Исполнители",workers,true,workers.menuFragment)
 
         //Настройки
         menu_6 = navView.getHeaderView(0).findViewById(R.id.id_settings_menu)
@@ -94,7 +96,12 @@ class ManagementFragment(val binding: ActivityMainBinding,val context: Context,v
         val types = Types_Class_Fragment()
         var dateTypes = DateOneFragment(menu_7,"Типы данных",types)
 
-        completionMenu(listOf(dateOrder,dateComing,dateStatistics,dateClients,dateWorkers,dateSettings,dateTypes))
+        //Экспорт Импорт
+        menu_8 = navView.getHeaderView(0).findViewById(R.id.id_exportimport_menu)
+        val exportimport = ExportImport_Class_Fragment()
+        var dateExportImport = DateOneFragment(menu_8,"Экспорт&Импорт",exportimport)
+
+        completionMenu(listOf(dateOrder,dateComing,dateStatistics,dateClients,dateWorkers,dateSettings,dateTypes,dateExportImport))
         menu_1.performClick()
     }
 

@@ -161,4 +161,101 @@ class SharedViewModel: ViewModel() {
         }
         return new_id
     }
+
+    fun <T> updateItem(item: T){
+        listener?.onDataChanged(item, 1)
+        when (item) {
+            is Client -> {
+                val currentList = _clients.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _clients.value = currentList
+                }
+            }
+            is Coming -> {
+                val currentList = _comings.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _comings.value = currentList
+                }
+            }
+            is Order -> {
+                val currentList = _orders.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _orders.value = currentList
+                }
+            }
+            is TypeMaterial -> {
+                val currentList = _typeMaterials.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _typeMaterials.value = currentList
+                }
+            }
+            is TypeName -> {
+                val currentList = _typeNames.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _typeNames.value = currentList
+                }
+            }
+            is TypeStatusComing -> {
+                val currentList = _typeStatusComings.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _typeStatusComings.value = currentList
+                }
+            }
+            is TypeStatusOrder -> {
+                val currentList = _typeStatusOrders.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _typeStatusOrders.value = currentList
+                }
+            }
+            is TypeStatusPay -> {
+                val currentList = _typeStatusPays.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _typeStatusPays.value = currentList
+                }
+            }
+            is TypeAccumulation -> {
+                val currentList = _typeAccumulations.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _typeAccumulations.value = currentList
+                }
+            }
+            is TypeUnit -> {
+                val currentList = _typeUnits.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _typeUnits.value = currentList
+                }
+            }
+            is Worker -> {
+                val currentList = _workers.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _workers.value = currentList
+                }
+            }
+            else -> {
+                throw IllegalArgumentException("Unsupported type")
+            }
+        }
+    }
 }

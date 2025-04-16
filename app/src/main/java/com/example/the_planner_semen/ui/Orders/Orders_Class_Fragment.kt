@@ -47,16 +47,8 @@ class Orders_Class_Fragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val galleryViewModel =
-            ViewModelProvider(this).get(Orders_Class_ViewModel::class.java)
-
         _binding = FragmentOrdersBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textOrders
-        galleryViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
 
         //инициализация списка
         recyclerView = binding.idRecuclerOrder
@@ -73,7 +65,7 @@ class Orders_Class_Fragment : Fragment() {
     var menuFragment: FragmentMenu  = init_my_mune()
     private fun init_my_mune():FragmentMenu {
         val dataMenuItem: Data_menu_item = Data_menu_item("Добавить заказ")
-        val items = listOf(dataMenuItem) // Пример списка с 100 элементами
+        val items = listOf(dataMenuItem)
         val fragmentMenu = FragmentMenu()
         fragmentMenu.getDate(items,object : InterfaceMenu.OnItemClickListener {
             override fun onItemClick(position: Int) {

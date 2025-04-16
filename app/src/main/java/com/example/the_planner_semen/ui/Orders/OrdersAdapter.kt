@@ -1,6 +1,5 @@
 package com.example.the_planner_semen.ui.Orders
 import android.content.Context
-import com.example.the_planner_semen.data_bd.Client
 
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +24,7 @@ class OrdersAdapter(
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title: TextView = itemView.findViewById(R.id.id_text_order_item) // Убедитесь, что ID соответствует вашему макету
+        val title: TextView = itemView.findViewById(R.id.id_text_list_item)
 
         init {
             itemView.setOnClickListener {
@@ -36,12 +35,12 @@ class OrdersAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.order_item, parent, false) // Убедитесь, что у вас есть соответствующий макет
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.title.text = items[position].nameText // Замените на соответствующее поле вашего класса OrderItem
+        holder.title.text = items[position].nameText
     }
 
     override fun getItemCount(): Int {

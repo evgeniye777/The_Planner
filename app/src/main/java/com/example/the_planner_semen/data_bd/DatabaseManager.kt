@@ -196,7 +196,7 @@ class DatabaseManager(private val context: Context, private val viewModel: Share
         if (cursor.moveToFirst()) {
             do {
                 val id = cursor.getInt(cursor.getColumnIndex("id"))
-                val name = cursor.getInt(cursor.getColumnIndex("name"))
+                val name = cursor.getString(cursor.getColumnIndex("name"))
                 val i = cursor.getInt(cursor.getColumnIndex("i"))
                 val visibility = cursor.getInt(cursor.getColumnIndex("visibility"))
                 typeStatusPays.add(TypeStatusPay(id, name, i, visibility))
