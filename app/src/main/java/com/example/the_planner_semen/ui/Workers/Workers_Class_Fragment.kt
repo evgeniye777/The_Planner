@@ -17,8 +17,8 @@ import com.example.the_planner_semen.databinding.FragmentWorkersBinding
 import com.example.the_planner_semen.my_menu.Data_menu_item
 import com.example.the_planner_semen.my_menu.FragmentMenu
 import com.example.the_planner_semen.my_menu.InterfaceMenu
-import com.example.the_planner_semen.ui.adapters.UniversalAdapter
-import com.example.the_planner_semen.ui.dialogs.UniversalDialogPerson
+import com.example.the_planner_semen.ui._adapters.UniversalAdapter
+import com.example.the_planner_semen.ui._dialogs.UniversalDialogPerson
 
 class Workers_Class_Fragment : Fragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()

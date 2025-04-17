@@ -9,34 +9,60 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="10dp"
         android:orientation="vertical">
-<LinearLayout
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    tools:ignore="MissingConstraints">
 
-    <Spinner
-        android:id="@+id/id_spinner_type_types"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="3" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            android:gravity="center|top"
+            tools:ignore="MissingConstraints">
 
-    <Button
-        android:id="@+id/id_but_add_type"
-        android:layout_width="0dp"
-        android:text="Добавить"
-        android:layout_height="wrap_content"
-        android:layout_weight="2" />
-</LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/id_recucler_types"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        tools:ignore="MissingConstraints" />
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="vertical"
+                tools:ignore="RtlHardcoded">
+            <Spinner
+                android:id="@+id/id_spinner_type_types"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:overlapAnchor="false"
+                android:dropDownVerticalOffset="5dp"
+                android:popupBackground="@color/whiteStatus"
+                android:background="@drawable/style_button_background" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/id_recucler_types"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                tools:ignore="RtlHardcoded">
+
+                <Button
+                    android:id="@+id/id_but_add_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/style_control_button_press"
+                    android:text="@string/add_list"
+                    app:backgroundTint="@null" />
+            </LinearLayout>
+        </LinearLayout>
+
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

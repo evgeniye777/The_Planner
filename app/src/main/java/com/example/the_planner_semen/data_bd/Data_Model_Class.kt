@@ -22,7 +22,7 @@ data class Client(
     override var visibility: Int = 1
 ) : DialogItemPerson
 
-data class Coming(
+data class Resource(
     var id: Int=-1,
     val statusComingId: Int = 1,
     val typeAccumulationId: Int = 1,
@@ -44,6 +44,12 @@ data class Coming(
     val delivery: Double?
 )
 
+data class Setting(
+    var id: Int = -1,
+    var name: String?,
+    var data: String?
+)
+
 data class Order(
     var id: Int=-1,
     val statusOrderId: Int = 1,
@@ -63,50 +69,50 @@ data class Order(
 data class TypeMaterial(
     override var id: Int = -1,
     override var name: String?,
-    override var visibility: Int = 1,
-    override var i: Int = -1
+    override var i: Int = -1,
+    override var visibility: Int = 1
 ) : DialogItemType
 
 data class TypeName(
     override var id: Int = -1,
     override var name: String?,
-    override var visibility: Int = 1,
-    override var i: Int = -1
+    override var i: Int = -1,
+    override var visibility: Int = 1
 ) : DialogItemType
 
 data class TypeStatusComing(
     override var id: Int = -1,
     override var name: String?,
-    override var visibility: Int = 1,
-    override var i: Int = -1
+    override var i: Int = -1,
+    override var visibility: Int = 1
 ) : DialogItemType
 
 data class TypeStatusOrder(
     override var id: Int = -1,
     override var name: String?,
-    override var visibility: Int = 1,
-    override var i: Int = -1
+    override var i: Int = -1,
+    override var visibility: Int = 1
 ) : DialogItemType
 
 data class TypeStatusPay(
     override var id: Int = -1,
     override var name: String?,
-    override var visibility: Int = 1,
-    override var i: Int = -1
+    override var i: Int = -1,
+    override var visibility: Int = 1
 ) : DialogItemType
 
 data class TypeAccumulation(
     override var id: Int = -1,
     override var name: String?,
-    override var visibility: Int = 1,
-    override var i: Int = -1
+    override var i: Int = -1,
+    override var visibility: Int = 1
 ) : DialogItemType
 
 data class TypeUnit(
     override var id: Int = -1,
     override var name: String?,
-    override var visibility: Int = 1,
-    override var i: Int = -1
+    override var i: Int = -1,
+    override var visibility: Int = 1
 ) : DialogItemType
 
 data class Worker(

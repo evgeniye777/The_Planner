@@ -11,8 +11,11 @@ class SharedViewModel: ViewModel() {
     private val _clients = MutableLiveData<List<Client>>()
     val clients: LiveData<List<Client>> get() = _clients
 
-    private val _comings = MutableLiveData<List<Coming>>()
-    val comings: LiveData<List<Coming>> get() = _comings
+    private val _resource = MutableLiveData<List<Resource>>()
+    val comings: LiveData<List<Resource>> get() = _resource
+
+    private val _setting = MutableLiveData<List<Setting>>()
+    val setting: LiveData<List<Setting>> get() = _setting
 
     private val _orders = MutableLiveData<List<Order>>()
     val orders: LiveData<List<Order>> get() = _orders
@@ -46,9 +49,14 @@ class SharedViewModel: ViewModel() {
         _clients.value = clientList
     }
 
-    // Метод для установки списка приходов
-    fun setComings(comingList: List<Coming>) {
-        _comings.value = comingList
+    // Метод для установки списка ресурсов
+    fun setResources(resourceList: List<Resource>) {
+        _resource.value = resourceList
+    }
+
+    // Метод для установки списка данных настроек
+    fun setSettings(settingList: List<Setting>) {
+        _setting.value = settingList
     }
 
     // Метод для установки списка заказов
@@ -98,17 +106,23 @@ class SharedViewModel: ViewModel() {
 
     //обобщенный метод добавления объекта
     fun <T> addItem(item: T):Int {
-        val new_id: Int = listener?.onDataChanged(item, 0)?:-1
+        var new_id: Int = -1
+        var r: Boolean = false
         when (item) {
             is Client -> {
                 item.id = new_id
                 val currentList = _clients.value ?: emptyList()
                 _clients.value = currentList + item
             }
-            is Coming -> {
+            is Resource -> {
                 item.id = new_id
-                val currentList = _comings.value ?: emptyList()
-                _comings.value = currentList + item
+                val currentList = _resource.value ?: emptyList()
+                _resource.value = currentList + item
+            }
+            is Setting -> {
+                item.id = new_id
+                val currentList = _setting.value ?: emptyList()
+                _setting.value = currentList + item
             }
             is Order -> {
                 item.id = new_id
@@ -116,39 +130,137 @@ class SharedViewModel: ViewModel() {
                 _orders.value = currentList + item
             }
             is TypeMaterial -> {
+                /*item.id = new_id
+                val currentList = _typeMaterials.value ?: emptyList()
+                _typeMaterials.value = currentList + item*/
                 item.id = new_id
                 val currentList = _typeMaterials.value ?: emptyList()
-                _typeMaterials.value = currentList + item
+
+                // Проверяем, существует ли элемент с таким же id
+                val exists = currentList.any { it.id == item.id }
+
+                if (!exists) {
+                    r=true
+                    // Если элемент не существует, добавляем его в список
+                    _typeMaterials.value = currentList + item
+                } else {
+                    // Элемент уже существует, можно обработать это событие
+                    println("Элемент с id ${item.id} уже существует.")
+                }
             }
             is TypeName -> {
+                /*item.id = new_id
+                val currentList = _typeNames.value ?: emptyList()
+                _typeNames.value = currentList + item*/
                 item.id = new_id
                 val currentList = _typeNames.value ?: emptyList()
-                _typeNames.value = currentList + item
+
+                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
+                val exists = currentList.any { it.name == item.name }
+
+                if (!exists) {
+                    r=true
+                    // Если элемент не существует, добавляем его в список
+                    _typeNames.value = currentList + item
+                } else {
+                    // Элемент уже существует, можно обработать это событие
+                    println("Элемент с name '${item.name}' уже существует.")
+                }
             }
             is TypeStatusComing -> {
+                /*item.id = new_id
+                val currentList = _typeStatusComings.value ?: emptyList()
+                _typeStatusComings.value = currentList + item*/
                 item.id = new_id
                 val currentList = _typeStatusComings.value ?: emptyList()
-                _typeStatusComings.value = currentList + item
+
+                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
+                val exists = currentList.any { it.name == item.name }
+
+                if (!exists) {
+                    r=true
+                    // Если элемент не существует, добавляем его в список
+                    _typeStatusComings.value = currentList + item
+                } else {
+                    // Элемент уже существует, можно обработать это событие
+                    println("Элемент с name '${item.name}' уже существует.")
+                }
             }
             is TypeStatusOrder -> {
+               /* item.id = new_id
+                val currentList = _typeStatusOrders.value ?: emptyList()
+                _typeStatusOrders.value = currentList + item*/
                 item.id = new_id
                 val currentList = _typeStatusOrders.value ?: emptyList()
-                _typeStatusOrders.value = currentList + item
+
+                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
+                val exists = currentList.any { it.name == item.name }
+
+                if (!exists) {
+                    r=true
+                    // Если элемент не существует, добавляем его в список
+                    _typeStatusOrders.value = currentList + item
+                } else {
+                    // Элемент уже существует, можно обработать это событие
+                    println("Элемент с name '${item.name}' уже существует.")
+                }
             }
             is TypeStatusPay -> {
+               /* item.id = new_id
+                val currentList = _typeStatusPays.value ?: emptyList()
+                _typeStatusPays.value = currentList + item*/
                 item.id = new_id
                 val currentList = _typeStatusPays.value ?: emptyList()
-                _typeStatusPays.value = currentList + item
+
+                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
+                val exists = currentList.any { it.name == item.name }
+
+                if (!exists) {
+                    r=true
+                    // Если элемент не существует, добавляем его в список
+                    _typeStatusPays.value = currentList + item
+                } else {
+                    // Элемент уже существует, можно обработать это событие
+                    println("Элемент с name '${item.name}' уже существует.")
+                }
             }
             is TypeAccumulation -> {
+                /*item.id = new_id
+                val currentList = _typeAccumulations.value ?: emptyList()
+                _typeAccumulations.value = currentList + item*/
                 item.id = new_id
                 val currentList = _typeAccumulations.value ?: emptyList()
-                _typeAccumulations.value = currentList + item
+
+                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
+                val exists = currentList.any { it.name == item.name }
+
+                if (!exists) {
+                    r=true
+                    // Если элемент не существует, добавляем его в список
+                    _typeAccumulations.value = currentList + item
+                } else {
+                    // Элемент уже существует, можно обработать это событие
+                    println("Элемент с name '${item.name}' уже существует.")
+                }
             }
             is TypeUnit -> {
+                /*item.id = new_id
+                val currentList = _typeUnits.value ?: emptyList()
+                _typeUnits.value = currentList + item*/
                 item.id = new_id
                 val currentList = _typeUnits.value ?: emptyList()
-                _typeUnits.value = currentList + item
+
+                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
+                val exists = currentList.any { it.name == item.name }
+
+                if (!exists) {
+                    r=true
+                    // Если элемент не существует, добавляем его в список
+                    _typeUnits.value = currentList + item
+                } else {
+                    // Элемент уже существует, можно обработать это событие
+                    println("Элемент с name '${item.name}' уже существует.")
+                }
             }
             is Worker -> {
                 item.id = new_id
@@ -159,9 +271,12 @@ class SharedViewModel: ViewModel() {
                 throw IllegalArgumentException("Unsupported type")
             }
         }
+        if (r) {new_id = listener?.onDataChanged(item, 0)?:-1}
+        else {new_id = -2}
         return new_id
     }
 
+    //Метод для редактирования объекта
     fun <T> updateItem(item: T){
         listener?.onDataChanged(item, 1)
         when (item) {
@@ -173,12 +288,20 @@ class SharedViewModel: ViewModel() {
                     _clients.value = currentList
                 }
             }
-            is Coming -> {
-                val currentList = _comings.value?.toMutableList() ?: mutableListOf()
+            is Resource -> {
+                val currentList = _resource.value?.toMutableList() ?: mutableListOf()
                 val index = currentList.indexOfFirst { it.id == item.id }
                 if (index != -1) {
                     currentList[index] = item // Обновляем элемент
-                    _comings.value = currentList
+                    _resource.value = currentList
+                }
+            }
+            is Setting -> {
+                val currentList = _setting.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOfFirst { it.id == item.id }
+                if (index != -1) {
+                    currentList[index] = item // Обновляем элемент
+                    _setting.value = currentList
                 }
             }
             is Order -> {
@@ -252,6 +375,76 @@ class SharedViewModel: ViewModel() {
                     currentList[index] = item // Обновляем элемент
                     _workers.value = currentList
                 }
+            }
+            else -> {
+                throw IllegalArgumentException("Unsupported type")
+            }
+        }
+    }
+
+    //метод для удаления объекта
+    fun <T> deleteItem(item: T) {
+        listener?.onDataChanged(item, 2)
+        when (item) {
+            is Client -> {
+                val currentList = _clients.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _clients.value = currentList
+            }
+            is Resource -> {
+                val currentList = _resource.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _resource.value = currentList
+            }
+            is Setting -> {
+                val currentList = _setting.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _setting.value = currentList
+            }
+            is Order -> {
+                val currentList = _orders.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _orders.value = currentList
+            }
+            is TypeMaterial -> {
+                val currentList = _typeMaterials.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _typeMaterials.value = currentList
+            }
+            is TypeName -> {
+                val currentList = _typeNames.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _typeNames.value = currentList
+            }
+            is TypeStatusComing -> {
+                val currentList = _typeStatusComings.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _typeStatusComings.value = currentList
+            }
+            is TypeStatusOrder -> {
+                val currentList = _typeStatusOrders.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _typeStatusOrders.value = currentList
+            }
+            is TypeStatusPay -> {
+                val currentList = _typeStatusPays.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _typeStatusPays.value = currentList
+            }
+            is TypeAccumulation -> {
+                val currentList = _typeAccumulations.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _typeAccumulations.value = currentList
+            }
+            is TypeUnit -> {
+                val currentList = _typeUnits.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _typeUnits.value = currentList
+            }
+            is Worker -> {
+                val currentList = _workers.value?.toMutableList() ?: mutableListOf()
+                currentList.removeIf { it.id == item.id } // Удаляем элемент
+                _workers.value = currentList
             }
             else -> {
                 throw IllegalArgumentException("Unsupported type")

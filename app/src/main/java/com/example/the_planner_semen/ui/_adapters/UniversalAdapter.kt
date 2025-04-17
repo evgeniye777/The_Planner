@@ -1,4 +1,4 @@
-package com.example.the_planner_semen.ui.adapters
+package com.example.the_planner_semen.ui._adapters
 
 import android.content.Context
 import android.os.Build
@@ -13,7 +13,8 @@ import com.example.the_planner_semen.R
 import com.example.the_planner_semen.data_bd.DialogItemPerson
 import com.example.the_planner_semen.data_bd.DialogItemType
 import com.example.the_planner_semen.data_bd.SharedViewModel
-import com.example.the_planner_semen.ui.dialogs.UniversalDialogPerson
+import com.example.the_planner_semen.ui._dialogs.UniversalDialogPerson
+import com.example.the_planner_semen.ui._dialogs.UniversalDialogType
 
 
 class UniversalAdapter<T>(
@@ -28,10 +29,11 @@ class UniversalAdapter<T>(
         fun bind(item: T) {
             itemView.setOnClickListener {
                 if (item is DialogItemPerson) {
-                    val clientDialog = UniversalDialogPerson(context,sharedViewModel,1,item as DialogItemPerson)
-                    clientDialog.showDialog()
+                    val personDialog = UniversalDialogPerson(context,sharedViewModel,1,item as DialogItemPerson)
+                    personDialog.showDialog()
                 } else if (item is DialogItemType){
-                    //holder.position = position; holder.title.text = (item as DialogItemType).name
+                    val typeDialog = UniversalDialogType(context,sharedViewModel,1,item as DialogItemType)
+                    typeDialog.showDialog()
                 }
 
             }

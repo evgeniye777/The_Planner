@@ -27,7 +27,8 @@ class DatabaseManager(private val context: Context, private val viewModel: Share
 
     private fun loadData() {
         loadClients()
-        loadComings()
+        loadResources()
+        loadSettings()
         loadOrders()
         loadTypeMaterials()
         loadTypeNames()
@@ -58,9 +59,9 @@ class DatabaseManager(private val context: Context, private val viewModel: Share
     }
 
     @SuppressLint("Range")
-    private fun loadComings() {
-        val cursor: Cursor = database.rawQuery("SELECT * FROM coming", null)
-        val comings = mutableListOf<Coming>()
+    private fun loadResources() {
+        val cursor: Cursor = database.rawQuery("SELECT * FROM resources", null)
+        val resources = mutableListOf<Resource>()
         if (cursor.moveToFirst()) {
             do {
                 val id = cursor.getInt(cursor.getColumnIndex("id"))
@@ -82,11 +83,28 @@ class DatabaseManager(private val context: Context, private val viewModel: Share
                 val workerId = cursor.getInt(cursor.getColumnIndex("worker_id"))
                 val salary = cursor.getDouble(cursor.getColumnIndex("salary"))
                 val delivery = cursor.getDouble(cursor.getColumnIndex("delivery"))
-                comings.add(Coming(id, statusComingId, typeAccumulationId, date, nameId, materialId, sX, sY, sZ, sScalar, unitId, count, priceOne, statusPayId, datePay, ordersIds, workerId, salary, delivery))
+                resources.add(Resource(id, statusComingId, typeAccumulationId, date, nameId, materialId, sX, sY, sZ, sScalar, unitId, count, priceOne, statusPayId, datePay, ordersIds, workerId, salary, delivery))
             } while (cursor.moveToNext())
         }
         cursor.close()
-        viewModel.setComings(comings)
+        viewModel.setResources(resources)
+    }
+
+    // Метод для загрузки данных настроек
+    @SuppressLint("Range")
+    private fun loadSettings() {
+        val cursor: Cursor = database.rawQuery("SELECT * FROM settings", null)
+        val settings = mutableListOf<Setting>()
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndex("id"))
+                val name = cursor.getString(cursor.getColumnIndex("name"))
+                val data = cursor.getString(cursor.getColumnIndex("data"))
+                settings.add(Setting(id, name, data))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        viewModel.setSettings(settings)
     }
 
     // Метод для загрузки заказов
@@ -272,11 +290,18 @@ class DatabaseManager(private val context: Context, private val viewModel: Share
                     2 -> deleteClient(data.id) // Удалить
                 }
             }
-            is Coming -> {
+            is Resource -> {
                 when (action) {
-                    0 -> new_id = addComing(data) // Добавить
-                    1 -> updateComing(data) // Изменить
-                    2 -> deleteComing(data.id) // Удалить
+                    0 -> new_id = addResource(data) // Добавить
+                    1 -> updateResource(data) // Изменить
+                    2 -> deleteResource(data.id) // Удалить
+                }
+            }
+            is Setting -> {
+                when (action) {
+                    0 -> new_id = addSettings(data) // Добавить
+                    1 -> updateSettings(data) // Изменить
+                    2 -> deleteSettings(data.id) // Удалить
                 }
             }
             is Order -> {
@@ -375,59 +400,79 @@ class DatabaseManager(private val context: Context, private val viewModel: Share
     }
 
 
-    ///Добавление Изменение Удаление Coming
-    private fun addComing(coming: Coming): Int {
+    ///Добавление Изменение Удаление Resource
+    private fun addResource(resource: Resource): Int {
         val values = ContentValues().apply {
-            put("status_coming_id", coming.statusComingId)
-            put("type_accumulation_id", coming.typeAccumulationId)
-            put("date", coming.date)
-            put("name_id", coming.nameId)
-            put("material_id", coming.materialId)
-            put("s_x", coming.sX)
-            put("s_y", coming.sY)
-            put("s_z", coming.sZ)
-            put("s_scalar", coming.sScalar)
-            put("unit_id", coming.unitId)
-            put("count", coming.count)
-            put("price_one", coming.priceOne)
-            put("status_pay_id", coming.statusPayId)
-            put("date_pay", coming.datePay)
-            put("orders_ids", coming.ordersIds)
-            put("worker_id", coming.workerId)
-            put("salary", coming.salary)
-            put("delivery", coming.delivery)
+            put("status_coming_id", resource.statusComingId)
+            put("type_accumulation_id", resource.typeAccumulationId)
+            put("date", resource.date)
+            put("name_id", resource.nameId)
+            put("material_id", resource.materialId)
+            put("s_x", resource.sX)
+            put("s_y", resource.sY)
+            put("s_z", resource.sZ)
+            put("s_scalar", resource.sScalar)
+            put("unit_id", resource.unitId)
+            put("count", resource.count)
+            put("price_one", resource.priceOne)
+            put("status_pay_id", resource.statusPayId)
+            put("date_pay", resource.datePay)
+            put("orders_ids", resource.ordersIds)
+            put("worker_id", resource.workerId)
+            put("salary", resource.salary)
+            put("delivery", resource.delivery)
         }
-        return database.insert("coming", null, values).toInt()
+        return database.insert("resources", null, values).toInt()
     }
 
-    private fun updateComing(coming: Coming) {
+    private fun updateResource(resource: Resource) {
         val values = ContentValues().apply {
-            put("status_coming_id", coming.statusComingId)
-            put("type_accumulation_id", coming.typeAccumulationId)
-            put("date", coming.date)
-            put("name_id", coming.nameId)
-            put("material_id", coming.materialId)
-            put("s_x", coming.sX)
-            put("s_y", coming.sY)
-            put("s_z", coming.sZ)
-            put("s_scalar", coming.sScalar)
-            put("unit_id", coming.unitId)
-            put("count", coming.count)
-            put("price_one", coming.priceOne)
-            put("status_pay_id", coming.statusPayId)
-            put("date_pay", coming.datePay)
-            put("orders_ids", coming.ordersIds)
-            put("worker_id", coming.workerId)
-            put("salary", coming.salary)
-            put("delivery", coming.delivery)
+            put("status_coming_id", resource.statusComingId)
+            put("type_accumulation_id", resource.typeAccumulationId)
+            put("date", resource.date)
+            put("name_id", resource.nameId)
+            put("material_id", resource.materialId)
+            put("s_x", resource.sX)
+            put("s_y", resource.sY)
+            put("s_z", resource.sZ)
+            put("s_scalar", resource.sScalar)
+            put("unit_id", resource.unitId)
+            put("count", resource.count)
+            put("price_one", resource.priceOne)
+            put("status_pay_id", resource.statusPayId)
+            put("date_pay", resource.datePay)
+            put("orders_ids", resource.ordersIds)
+            put("worker_id", resource.workerId)
+            put("salary", resource.salary)
+            put("delivery", resource.delivery)
         }
-        database.update("coming", values, "id=?", arrayOf(coming.id.toString()))
+        database.update("resources", values, "id=?", arrayOf(resource.id.toString()))
     }
 
-    private fun deleteComing(comingId: Int) {
-        database.delete("coming", "id=?", arrayOf(comingId.toString()))
+    private fun deleteResource(comingId: Int) {
+        database.delete("resources", "id=?", arrayOf(comingId.toString()))
     }
 
+    ///Добавление Изменение Удаление Settings
+    private fun addSettings(setting: Setting): Int {
+        val values = ContentValues().apply {
+            put("name", setting.name)
+            put("data", setting.data)
+        }
+        return database.insert("settings", null, values).toInt()
+    }
+
+    private fun updateSettings(setting: Setting) {
+        val values = ContentValues().apply {
+            put("name", setting.name)
+            put("data", setting.data)
+        }
+        database.update("settings", values, "id=?", arrayOf(setting.id.toString()))
+    }
+
+    private fun deleteSettings(settingId: Int) {
+        database.delete("settings", "id=?", arrayOf(settingId.toString()))
+    }
 
     ///Добавление Изменение Удаление Order
     private fun addOrder(order: Order): Int {
@@ -470,7 +515,7 @@ class DatabaseManager(private val context: Context, private val viewModel: Share
         database.delete("orders", "id=?", arrayOf(orderId.toString()))
     }
 
-    ///Добавление Изменение Удаление Coming
+    ///Добавление Изменение Удаление Material
     private fun addTypesMaterial(typesMaterial: TypeMaterial): Int {
         val values = ContentValues().apply {
             put("name", typesMaterial.name)

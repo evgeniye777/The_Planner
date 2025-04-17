@@ -14,7 +14,7 @@ import java.io.OutputStream;
 public class DataBases extends SQLiteOpenHelper {
     private static String DB_NAME="db_planner.db";
     private static String DB_PATH = "";
-    private static int DB_VERSION = 19;
+    private static int DB_VERSION = 22;
     private SQLiteDatabase mDataBase;
     private final Context mContext;
     private boolean mNeedUpdate = false;

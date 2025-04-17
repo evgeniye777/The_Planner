@@ -16,6 +16,8 @@
     <string name="change_list">Изменить</string>
     <string name="save_list">Сохранить</string>
     <string name="close_list">Отмена</string>
+    <string name="del_list">Удалить</string>
+
     <string name="visible_checkbox">Отображать</string>
 
     <string-array name="type_array">
