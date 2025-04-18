@@ -64,42 +64,42 @@ class ManagementFragment(val binding: ActivityMainBinding,val context: Context,v
         //Заказы
         menu_1 = navView.getHeaderView(0).findViewById(R.id.id_orders_menu)
         val orders = Orders_Class_Fragment()
-        var dateOrder = DateOneFragment(menu_1,"Заказы",orders,true,orders.menuFragment)
+        var dateOrder = DateOneFragment(menu_l = menu_1, menu_name = "Заказы", fragment = orders, img_id = R.drawable.img_main_menu_orders, optionR = true, option_f = orders.menuFragment)
 
         //Ресурсы
         menu_2 = navView.getHeaderView(0).findViewById(R.id.id_coming_menu)
         val coming = Coming_Class_Fragment()
-        var dateComing = DateOneFragment(menu_2,"Ресурсы",coming,true,coming.menuFragment)
+        var dateComing = DateOneFragment(menu_l = menu_2,menu_name = "Ресурсы",fragment = coming,img_id = R.drawable.img_resources,optionR = true,option_f = coming.menuFragment)
 
         //Статистика
         menu_3 = navView.getHeaderView(0).findViewById(R.id.id_statistics_menu)
         val statistics = Statistics_Class_Fragment()
-        var dateStatistics = DateOneFragment(menu_3,"Статистика",statistics)
+        var dateStatistics = DateOneFragment(menu_l = menu_3,menu_name = "Статистика",fragment = statistics,img_id = R.drawable.img_statistics)
 
         //Клиенты
         menu_4 = navView.getHeaderView(0).findViewById(R.id.id_clients_menu)
         val clients = Clients_Class_Fragment()
-        var dateClients = DateOneFragment(menu_4,"Клиенты",clients,true,clients.menuFragment)
+        var dateClients = DateOneFragment(menu_l = menu_4,menu_name = "Клиенты",fragment = clients,img_id = R.drawable.img_clients,optionR = true,option_f = clients.menuFragment)
 
         //Исполнители
         menu_5 = navView.getHeaderView(0).findViewById(R.id.id_workers_menu)
         val workers = Workers_Class_Fragment()
-        var dateWorkers = DateOneFragment(menu_5,"Исполнители",workers,true,workers.menuFragment)
+        var dateWorkers = DateOneFragment(menu_l = menu_5,menu_name = "Исполнители",fragment = workers,img_id = R.drawable.img_main_menu_workers,optionR = true,option_f = workers.menuFragment)
 
         //Настройки
         menu_6 = navView.getHeaderView(0).findViewById(R.id.id_settings_menu)
         val settings = Settings_Class_Fragment()
-        var dateSettings = DateOneFragment(menu_6,"Настройки",settings)
+        var dateSettings = DateOneFragment(menu_l = menu_6,menu_name = "Настройки",fragment = settings,img_id = R.drawable.img_main_menu_settings)
 
         //Типы данных
         menu_7 = navView.getHeaderView(0).findViewById(R.id.id_types_menu)
         val types = Types_Class_Fragment()
-        var dateTypes = DateOneFragment(menu_7,"Типы данных",types)
+        var dateTypes = DateOneFragment(menu_l = menu_7,menu_name = "Типы данных",fragment = types,img_id = R.drawable.img_type_data)
 
         //Экспорт Импорт
         menu_8 = navView.getHeaderView(0).findViewById(R.id.id_exportimport_menu)
         val exportimport = ExportImport_Class_Fragment()
-        var dateExportImport = DateOneFragment(menu_8,"Экспорт&Импорт",exportimport)
+        var dateExportImport = DateOneFragment(menu_l = menu_8,menu_name = "Экспорт&Импорт",fragment = exportimport, img_id = R.drawable.img_import_export)
 
         completionMenu(listOf(dateOrder,dateComing,dateStatistics,dateClients,dateWorkers,dateSettings,dateTypes,dateExportImport))
         menu_1.performClick()
@@ -158,16 +158,21 @@ class ManagementFragment(val binding: ActivityMainBinding,val context: Context,v
     private fun completionMenu(dataMenu: List<DateOneFragment>) {
 
         dataMenu.forEachIndexed { index, data ->
-            val imageView: ImageView = data.linear.findViewById(R.id.menu_image)
-            val textView: TextView = data.linear.findViewById(R.id.menu_text)
+            val imageView: ImageView = data.menu_l.findViewById(R.id.menu_image)
+            val textView: TextView = data.menu_l.findViewById(R.id.menu_text)
             // Установка текста для TextView
-            textView.text = data.nameMenu
+            textView.text = data.menu_name
+            if (data.img_id!=-1) {
+                try {
+                    imageView.setImageResource(data.img_id)
+                }catch(_:Exception) {}
+            }
             // Установка обработчика клика
-            data.linear.setOnClickListener {
+            data.menu_l.setOnClickListener {
                 changeStyleMenu(index,dataMenu)
-                if (data.menuR) {image_my_menu.visibility = View.VISIBLE;
+                if (data.optionR) {image_my_menu.visibility = View.VISIBLE;
 
-                    fragmentMenu = data.menu
+                    fragmentMenu = data.option_f
                 }
                 else {image_my_menu.visibility = View.GONE;}
                 loadFragment(data.fragment)
@@ -180,9 +185,9 @@ class ManagementFragment(val binding: ActivityMainBinding,val context: Context,v
     private fun changeStyleMenu(position:Int,dataMenu: List<DateOneFragment>) {
         dataMenu.forEachIndexed { index, data ->
             if (index == position) {
-                data.linear.setBackgroundResource(R.drawable.style_main_menu_1)
+                data.menu_l.setBackgroundResource(R.drawable.style_main_menu_1)
             }
-            else {data.linear.setBackgroundResource(R.drawable.style_main_menu_0)}
+            else {data.menu_l.setBackgroundResource(R.drawable.style_main_menu_0)}
         }
     }
 

@@ -17,7 +17,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            tools:ignore="UselessParent"
-           android:background="@drawable/img_shell_for_icon"
+           android:background="@drawable/style_shell12"
            android:backgroundTint="@color/my_gray2">
 
            <ImageView
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:background="@drawable/img_shell_for_textfield"
+            android:background="@drawable/style_shell12"
             android:layout_marginStart="5dp"
             android:backgroundTint="@color/my_gray2">
 
@@ -73,7 +73,7 @@
                 android:layout_weight="0.7"
                 android:paddingTop="11dp"
                 android:paddingBottom="11dp"
-                android:src="@drawable/img_my_menu"
+                android:src="@drawable/img_open_my_menu"
                 app:tint="@color/white" />
         </LinearLayout>
     </LinearLayout>

@@ -25,7 +25,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:layout_height="match_parent"
         android:contentDescription="@string/nav_header_desc"
         app:srcCompat="@drawable/log" />

@@ -71,9 +71,9 @@ class Orders_Class_Fragment : Fragment() {
             override fun onItemClick(position: Int) {
                 when (position) {
                     0 -> {
-                        val order = Order( date = "2023-10-02",
+                       /* val order = Order( date = "2023-10-02",
                             nameText = "Заказ без дополнительных параметров")
-                        val i: Int = sharedViewModel.addItem(order)
+                        val i: Int = sharedViewModel.addItem(order)*/
                     }
                     1 -> {
                         vivod("1")

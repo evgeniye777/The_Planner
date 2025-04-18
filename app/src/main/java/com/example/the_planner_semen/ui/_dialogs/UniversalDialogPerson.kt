@@ -108,8 +108,10 @@ class UniversalDialogPerson<T : DialogItemPerson>(
                         else -> throw IllegalArgumentException("Unsupported item type")
                     }as T
 
-                    sharedViewModel.addItem(newItem)
-                    showToast("Данные добавлены")
+                    val new_id = sharedViewModel.addItem(newItem)
+                    if (new_id ==-1) {showToast("Данные добавлены")}
+                    else if (new_id ==-2) {showToast("Данные уже существуют")}
+                    else {showToast("Данные добавлены")}
                 }catch (e:Exception) {showToast("Неизвестная ошибка добавления")  }
 
             } else {

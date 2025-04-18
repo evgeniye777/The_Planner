@@ -107,25 +107,32 @@ class SharedViewModel: ViewModel() {
     //обобщенный метод добавления объекта
     fun <T> addItem(item: T):Int {
         var new_id: Int = -1
-        var r: Boolean = false
+        var r = false
         when (item) {
             is Client -> {
-                item.id = new_id
                 val currentList = _clients.value ?: emptyList()
-                _clients.value = currentList + item
+                // Проверяем, существует ли элемент с таким же name и (phone или email)
+                val exists = currentList.any { it.name == item.name && (it.phone == item.phone || it.email == item.email) }
+
+                if (!exists) {
+                    r = true
+                    _clients.value = currentList + item
+                } else {
+                    println("Элемент с name '${item.name}' и (phone '${item.phone}' или email '${item.email}') уже существует.")
+                }
             }
             is Resource -> {
-                item.id = new_id
+                r=true
                 val currentList = _resource.value ?: emptyList()
                 _resource.value = currentList + item
             }
             is Setting -> {
-                item.id = new_id
+                r=true
                 val currentList = _setting.value ?: emptyList()
                 _setting.value = currentList + item
             }
             is Order -> {
-                item.id = new_id
+                r=true
                 val currentList = _orders.value ?: emptyList()
                 _orders.value = currentList + item
             }
@@ -133,37 +140,27 @@ class SharedViewModel: ViewModel() {
                 /*item.id = new_id
                 val currentList = _typeMaterials.value ?: emptyList()
                 _typeMaterials.value = currentList + item*/
-                item.id = new_id
                 val currentList = _typeMaterials.value ?: emptyList()
-
-                // Проверяем, существует ли элемент с таким же id
-                val exists = currentList.any { it.id == item.id }
+                val exists = currentList.any { it.name == item.name }
 
                 if (!exists) {
                     r=true
-                    // Если элемент не существует, добавляем его в список
                     _typeMaterials.value = currentList + item
                 } else {
-                    // Элемент уже существует, можно обработать это событие
-                    println("Элемент с id ${item.id} уже существует.")
+                    println("Элемент с id ${item.name} уже существует.")
                 }
             }
             is TypeName -> {
                 /*item.id = new_id
                 val currentList = _typeNames.value ?: emptyList()
                 _typeNames.value = currentList + item*/
-                item.id = new_id
                 val currentList = _typeNames.value ?: emptyList()
 
-                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
                 val exists = currentList.any { it.name == item.name }
-
                 if (!exists) {
                     r=true
-                    // Если элемент не существует, добавляем его в список
                     _typeNames.value = currentList + item
                 } else {
-                    // Элемент уже существует, можно обработать это событие
                     println("Элемент с name '${item.name}' уже существует.")
                 }
             }
@@ -171,18 +168,12 @@ class SharedViewModel: ViewModel() {
                 /*item.id = new_id
                 val currentList = _typeStatusComings.value ?: emptyList()
                 _typeStatusComings.value = currentList + item*/
-                item.id = new_id
                 val currentList = _typeStatusComings.value ?: emptyList()
-
-                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
                 val exists = currentList.any { it.name == item.name }
-
                 if (!exists) {
                     r=true
-                    // Если элемент не существует, добавляем его в список
                     _typeStatusComings.value = currentList + item
                 } else {
-                    // Элемент уже существует, можно обработать это событие
                     println("Элемент с name '${item.name}' уже существует.")
                 }
             }
@@ -190,18 +181,13 @@ class SharedViewModel: ViewModel() {
                /* item.id = new_id
                 val currentList = _typeStatusOrders.value ?: emptyList()
                 _typeStatusOrders.value = currentList + item*/
-                item.id = new_id
                 val currentList = _typeStatusOrders.value ?: emptyList()
-
-                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
                 val exists = currentList.any { it.name == item.name }
 
                 if (!exists) {
                     r=true
-                    // Если элемент не существует, добавляем его в список
                     _typeStatusOrders.value = currentList + item
                 } else {
-                    // Элемент уже существует, можно обработать это событие
                     println("Элемент с name '${item.name}' уже существует.")
                 }
             }
@@ -209,18 +195,12 @@ class SharedViewModel: ViewModel() {
                /* item.id = new_id
                 val currentList = _typeStatusPays.value ?: emptyList()
                 _typeStatusPays.value = currentList + item*/
-                item.id = new_id
                 val currentList = _typeStatusPays.value ?: emptyList()
-
-                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
                 val exists = currentList.any { it.name == item.name }
-
                 if (!exists) {
                     r=true
-                    // Если элемент не существует, добавляем его в список
                     _typeStatusPays.value = currentList + item
                 } else {
-                    // Элемент уже существует, можно обработать это событие
                     println("Элемент с name '${item.name}' уже существует.")
                 }
             }
@@ -228,18 +208,12 @@ class SharedViewModel: ViewModel() {
                 /*item.id = new_id
                 val currentList = _typeAccumulations.value ?: emptyList()
                 _typeAccumulations.value = currentList + item*/
-                item.id = new_id
                 val currentList = _typeAccumulations.value ?: emptyList()
-
-                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
                 val exists = currentList.any { it.name == item.name }
-
                 if (!exists) {
                     r=true
-                    // Если элемент не существует, добавляем его в список
                     _typeAccumulations.value = currentList + item
                 } else {
-                    // Элемент уже существует, можно обработать это событие
                     println("Элемент с name '${item.name}' уже существует.")
                 }
             }
@@ -247,31 +221,77 @@ class SharedViewModel: ViewModel() {
                 /*item.id = new_id
                 val currentList = _typeUnits.value ?: emptyList()
                 _typeUnits.value = currentList + item*/
-                item.id = new_id
                 val currentList = _typeUnits.value ?: emptyList()
-
-                // Проверяем, существует ли элемент с таким же name (сравнение по буквам)
                 val exists = currentList.any { it.name == item.name }
-
                 if (!exists) {
                     r=true
-                    // Если элемент не существует, добавляем его в список
                     _typeUnits.value = currentList + item
                 } else {
-                    // Элемент уже существует, можно обработать это событие
                     println("Элемент с name '${item.name}' уже существует.")
                 }
             }
             is Worker -> {
-                item.id = new_id
                 val currentList = _workers.value ?: emptyList()
-                _workers.value = currentList + item
+                // Проверяем, существует ли элемент с таким же name и (phone или email)
+                val exists = currentList.any { it.name == item.name && (it.phone == item.phone || it.email == item.email) }
+
+                if (!exists) {
+                    r = true
+                    _workers.value = currentList + item
+                } else {
+                    println("Элемент с name '${item.name}' и (phone '${item.phone}' или email '${item.email}') уже существует.")
+                }
             }
             else -> {
                 throw IllegalArgumentException("Unsupported type")
             }
         }
-        if (r) {new_id = listener?.onDataChanged(item, 0)?:-1}
+        if (r) {new_id = listener?.onDataChanged(item, 0)?:-1
+            if (new_id != -1) {
+                //устанавливаем id в добавленном объекте
+                when (item) {
+                    is Client -> {
+                        item.id = new_id
+                    }
+                    is Resource -> {
+                        item.id = new_id
+                    }
+                    is Setting -> {
+                        item.id = new_id
+                    }
+                    is Order -> {
+                        item.id = new_id
+                    }
+                    is TypeMaterial -> {
+                        item.id = new_id
+                    }
+                    is TypeName -> {
+                        item.id = new_id
+                    }
+                    is TypeStatusComing -> {
+                        item.id = new_id
+                    }
+                    is TypeStatusOrder -> {
+                        item.id = new_id
+                    }
+                    is TypeStatusPay -> {
+                        item.id = new_id
+                    }
+                    is TypeAccumulation -> {
+                        item.id = new_id
+                    }
+                    is TypeUnit -> {
+                        item.id = new_id
+                    }
+                    is Worker -> {
+                        item.id = new_id
+                    }
+                    else -> {
+                        throw IllegalArgumentException("Unsupported type")
+                    }
+                }
+            }
+        }
         else {new_id = -2}
         return new_id
     }
