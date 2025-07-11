@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.the_planner_semen"
+    namespace = "com.example.MyTests"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.the_planner_semen"
+        applicationId = "com.example.MyTests"
         minSdk = 25
         targetSdk = 34
         versionCode = 1

@@ -11,8 +11,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.the_planner_semen.R
-import com.example.the_planner_semen.databinding.ActivityMainBinding
+import com.example.MyTests.R
+import com.example.MyTests.databinding.ActivityMainBinding
 import com.example.the_planner_semen.my_menu.FragmentMenu
 import com.example.the_planner_semen.ui.Coming.Coming_Class_Fragment
 import com.example.the_planner_semen.ui.Orders.Orders_Class_Fragment
@@ -24,7 +24,7 @@ import com.example.the_planner_semen.ui.Statistics.Types_Class_Fragment
 import com.example.the_planner_semen.ui.Statistics.Workers_Class_Fragment
 import com.google.android.material.navigation.NavigationView
 
-class ManagementFragment(val binding: ActivityMainBinding,val context: Context,val fragmentManager: FragmentManager) {
+class ManagementFragment(val binding: ActivityMainBinding, val context: Context, val fragmentManager: FragmentManager) {
     private lateinit var menu_1: LinearLayout
     private lateinit var menu_2: LinearLayout
     private lateinit var menu_3: LinearLayout

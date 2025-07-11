@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.the_planner_semen.R
 
-class FragmentMenu : Fragment(), My_Menu_Adapter.HideFragmentListener{
+class FragmentMenu : Fragment(), My_Menu_Adapter.HideFragmentListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: My_Menu_Adapter
-    private lateinit var items: List<Data_menu_item>
-    private lateinit var listener: InterfaceMenu.OnItemClickListener
+    private var items: List<Data_menu_item>? = null // Измените на nullable тип
+    private var listener: InterfaceMenu.OnItemClickListener? = null // Измените на nullable тип
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.my_menu_recycler, container, false)
@@ -24,25 +24,34 @@ class FragmentMenu : Fragment(), My_Menu_Adapter.HideFragmentListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //скрываем меню при клике на оставшуюся часть экрана
+        // Скрываем меню при клике на оставшуюся часть экрана
         val linearAllmenu: LinearLayout = view.findViewById(R.id.my_linear_layout)
-        linearAllmenu.setOnClickListener{parentFragmentManager.beginTransaction().hide(this).commit() }
+        linearAllmenu.setOnClickListener { parentFragmentManager.beginTransaction().hide(this).commit() }
 
-        //инициализация списка
+        // Инициализация списка
         recyclerView = view.findViewById(R.id.id_my_menu)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        // Инициализируйте адаптер с обработчиком нажатий
-        adapter = My_Menu_Adapter(items, listener,this) // Передаем текущий фрагмент как слушатель
-        recyclerView.adapter = adapter
+        // Проверяем, инициализированы ли items и listener
+        if (items != null && listener != null) {
+            // Инициализируйте адаптер с обработчиком нажатий
+            adapter = My_Menu_Adapter(items!!, listener!!, this) // Используйте !! для безопасного извлечения
+            recyclerView.adapter = adapter
+        }
     }
 
-    fun getDate(items0: List<Data_menu_item>,listener0: InterfaceMenu.OnItemClickListener) {
+    fun getDate(items0: List<Data_menu_item>, listener0: InterfaceMenu.OnItemClickListener) {
         items = items0
         listener = listener0
+
+        // Если фрагмент уже создан, обновите адаптер
+        if (::recyclerView.isInitialized) {
+            adapter = My_Menu_Adapter(items!!, listener!!, this)
+            recyclerView.adapter = adapter
+        }
     }
 
-    //реализуем интерфейс для скрытия меню при выборе элемента
+    // Реализуем интерфейс для скрытия меню при выборе элемента
     override fun onHideFragment() {
         // Скрываем фрагмент
         parentFragmentManager.beginTransaction().hide(this).commit()

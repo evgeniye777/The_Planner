@@ -12,10 +12,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.MyTests.databinding.FragmentExportimportBinding
 import com.example.the_planner_semen.data_bd.DataExporter
 import com.example.the_planner_semen.data_bd.DataImporter
 import com.example.the_planner_semen.data_bd.SharedViewModel
-import com.example.the_planner_semen.databinding.FragmentExportimportBinding
 
 class ExportImport_Class_Fragment : Fragment() {
     lateinit var filePickerLauncherImport: ActivityResultLauncher<Intent>
